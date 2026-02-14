@@ -331,47 +331,69 @@ Through academic projects and self-learning, I have developed a structured appro
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="text-center mb-4" style="color: #ffff00; text-shadow: 0 0 15px #ffff00;">Contact</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="name" class="form-label" style="color: #ffffff;">Nama</label>
-                    <input type="text" class="form-control" id="name" style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label" style="color: #ffffff;">Email</label>
-                    <input type="email" class="form-control" id="email" style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;">
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label" style="color: #ffffff;">Pesan</label>
-                    <textarea class="form-control" id="message" rows="3" style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;"></textarea>
-                </div>
-                <button type="submit" class="btn btn-success contact-btn-anim">Kirim</button>
-            </form>
-        </div>
-    </section>
+   <!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="text-center mb-4" style="color: #ffff00; text-shadow: 0 0 15px #ffff00;">
+            Contact
+        </h2>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 [Mohamad Nur Taufiq]. Semua hak dilindungi.</p>
-    </footer>
+        <!-- FORM KE WHATSAPP -->
+        <form onsubmit="kirimWA(); return false;">
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS untuk animasi klik -->
-    <script>
-        // Animasi untuk navbar links
-        document.querySelectorAll('.nav-link-anim').forEach(link => {
-            link.addEventListener('click', function() {
-                this.classList.add('animate__bounce');
-                setTimeout(() => this.classList.remove('animate__bounce'), 1000);
-            });
+            <div class="mb-3">
+                <label for="name" class="form-label" style="color: #ffffff;">Nama</label>
+                <input type="text" id="name" class="form-control"
+                style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label" style="color: #ffffff;">Email</label>
+                <input type="email" id="email" class="form-control"
+                style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="message" class="form-label" style="color: #ffffff;">Pesan</label>
+                <textarea id="message" class="form-control" rows="3"
+                style="background-color: rgba(0,0,0,0.5); border-color: #00ffff; color: #ffffff;" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success contact-btn-anim">
+                Kirim
+            </button>
+
+        </form>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Mohamad Nur Taufiq. Semua hak dilindungi.</p>
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Custom JS -->
+<script>
+
+    // Animasi navbar
+    document.querySelectorAll('.nav-link-anim').forEach(link => {
+        link.addEventListener('click', function() {
+            this.classList.add('animate__bounce');
+            setTimeout(() => this.classList.remove('animate__bounce'), 1000);
         });
+    });
 
-        // Animasi untuk hero button
-        document.querySelector('.hero-btn-anim').addEventListener('click', function() {
+
+    // Animasi hero button
+    var heroBtn = document.querySelector('.hero-btn-anim');
+    if(heroBtn){
+        heroBtn.addEventListener('click', function() {
             this.classList.add('animate__fadeOut');
             setTimeout(() => {
                 this.classList.remove('animate__fadeOut');
@@ -379,23 +401,46 @@ Through academic projects and self-learning, I have developed a structured appro
             }, 500);
             setTimeout(() => this.classList.remove('animate__fadeIn'), 1000);
         });
+    }
 
-        // Animasi untuk portfolio cards
-        document.querySelectorAll('.portfolio-card-anim').forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.add('animate__shake');
-                setTimeout(() => this.classList.remove('animate__shake'), 1000);
-            });
-        });
 
-        // Animasi untuk contact button
-        document.querySelector('.contact-btn-anim').addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.add('animate__pulse');
-            setTimeout(() => this.classList.remove('animate__pulse'), 1000);
-            alert('Pesan dikirim! (Ini demo)');
+    // Animasi portfolio
+    document.querySelectorAll('.portfolio-card-anim').forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.add('animate__shake');
+            setTimeout(() => this.classList.remove('animate__shake'), 1000);
         });
-    </script>
+    });
+
+
+    // Animasi tombol contact
+    document.querySelector('.contact-btn-anim').addEventListener('click', function() {
+        this.classList.add('animate__pulse');
+        setTimeout(() => this.classList.remove('animate__pulse'), 1000);
+    });
+
+
+    // FUNGSI KIRIM KE WHATSAPP
+    function kirimWA(){
+
+        var nama = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var pesan = document.getElementById("message").value;
+
+        var nomor = "6289654017940";
+
+        var text = "Halo, saya " + nama + "%0A" +
+                   "Email: " + email + "%0A" +
+                   "Pesan: " + pesan;
+
+        var url = "https://wa.me/" + nomor + "?text=" + text;
+
+        window.open(url, "_blank");
+
+    }
+
+</script>
+
 </body>
-
 </html>
+
